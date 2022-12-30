@@ -1,5 +1,14 @@
-<h1>User info</h1>
-<tr>name</tr>
-<%= @user.name %>
-<th>introduction</th>
-<%= @user.introduction %>
+<%= render 'info', user: @user %>
+<% if @user == current_user %>
+   <%= link_to "userのedit",edit_user_path(current_user.id) %>
+  <% else %>
+   <%= link_to  "userのedit",user_path(current_user.id) %>
+<% end %>
+<%= render 'books/new', book: @book %>
+
+
+<% @books.each do |book| %>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <%= link_to book.title,book_path(book.id) %>
+  <%= book.body %>
+<% end %>

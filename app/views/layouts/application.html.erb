@@ -12,11 +12,28 @@
 
   <body>
     <header>
+       <%= link_to "bookers", root_path %>
       <% if user_signed_in? %>
+         <li>
+           <%= link_to "Home",user_path(current_user.id) %>
+         </li>
+         <li>
+           <%= link_to "Users",users_path %>
+         </li>
+         <li>
+           <%= link_to "Books",books_path %>
+         </li>
          <li>
            <%= link_to "Log out", destroy_user_session_path, method: :delete %>
          </li>
+         
       <% else %>
+         <li>
+           <%= link_to "Home",root_path %>
+         </li>
+         <li>
+           <%= link_to "About",about_path %>
+         </li>
          <li>
            <%= link_to "Sign up", new_user_registration_path %>
          </li>
@@ -25,6 +42,16 @@
          </li>
       <% end %>
     </header>
+    
+    <div class="flash-notifications">
+        <% flash.each do |key, value| %>
+         <%= content_tag(:p,value,class: key) %>
+        <% end %>
+    </div>
+    
     <%= yield %>
+    <fooder>
+        <p>CopyRight Infratop.inc</p>
+    </fooder>
   </body>
 </html>

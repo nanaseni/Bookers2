@@ -3,6 +3,8 @@
       <label>Name</label>
       <%= f.text_field :name %>
       <label>Image</label>
+      <%= f.file_field :profile_image, accept: "image/*" %>
       <label>Introduction</label>
-      
+      <%= f.text_field :introduction %>
+      <%= f.submit "Update User" %>
 <% end %>

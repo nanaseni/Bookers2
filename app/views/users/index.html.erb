@@ -1,6 +1,13 @@
-<h1>Users2</h1>
+<%= render 'info', user: current_user %>
+<%= link_to "userのedit",edit_user_path(current_user.id) %>
+<%= render 'books/new', book: @book %>
+
+
+<h1>Users</h1>
 <th>image</th>
 <th>name</th>
 <% @users.each do |user| %>
-<%= user.name %>
+    <%= image_tag user.get_profile_image(100,100) %>
+    <%= user.name %>
+    <%= link_to "show", user_path(user.id) %>
 <% end %>
