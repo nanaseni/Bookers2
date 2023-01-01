@@ -1,25 +1,69 @@
-<%= render 'users/info', user: @book.user %>
-<div class="row">
-  <% if @book.user == current_user %>
-    <%= link_to edit_user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
-     <i class="fas fa-user-cog"></i>
-    <% end %>
-  <% else %>
-    <%= link_to user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
-     <i class="fas fa-user-cog"></i>
-    <% end %>
-  <% end %>
+<div class="container px-5 px-sm-0">
+    <div class="row">
+        <div class= "col-md-3">
+            <%= render 'users/info', user: @book.user %>
+            <div class="row">
+              <% if @book.user == current_user %>
+                <%= link_to edit_user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
+                 <i class="fas fa-user-cog"></i>
+                <% end %>
+              <% else %>
+                <%= link_to user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
+                 <i class="fas fa-user-cog"></i>
+                <% end %>
+              <% end %>
+            </div>
+            <%= render 'new', book: Book.new %>
+        </div>
+        <div class="col-md-8 offset-md-1">
+            <h2>Book detail</h2>
+            <% if @book.user == current_user %>
+            <table class="table">
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <%= link_to user_path(@book.user.id) do %>
+                            <%= image_tag @book.user.get_profile_image(80,80) %><br>
+                            <%= @book.user.name %>
+                            <% end %>
+
+                        </td>
+                        <td>
+                          <%= link_to @book.title, book_path(@book) %>
+                        </td>
+                        <td>
+                           <%= @book.body %>
+                        </td>
+                        <td><%= link_to edit_book_path(@book),class: "btn btn-sm btn-success" do %>
+                              Edit
+                            <% end %>
+                        </td>
+                        <td><%= link_to book_path(@book), method: :delete,"data-confirm" => "本当に消しますか？",class: "btn btn-sm btn-danger" do %>
+                               Destroy
+                            <% end %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <% else %>
+            <table class="table">
+                <tbody>
+                  <tr>
+                    <td><%= link_to user_path(@book.user.id) do %>
+                         <%= image_tag @book.user.get_profile_image(80,80) %><br><%= @book.user.name %>
+                        <% end %>
+                        </td>
+                    <td> <%= link_to @book.title, book_path(@book) %></td>
+                    <td><%= @book.body %></td>
+                  </tr>
+                </tbody>
+
+            </table>
+            <% end %>
+
+        </div>
+    </div>
 </div>
 
 
-<%= render 'new', book: Book.new %>
-
-<h1>Books</h1>
-   <%= link_to @book.title, book_path(@book) %>
-   <%= @book.body %>
-   <%= image_tag @book.user.get_profile_image(100,100) %>
-   <%= link_to @book.user.name, user_path(@book.user.id) %>
-   <% if @book.user == current_user %>
-     <%= link_to "Edit", edit_book_path(@book) %>
-     <%= link_to "Destroy", book_path(@book), method: :delete,"data-confirm" => "本当に消しますか？" %>
-   <% end %>
