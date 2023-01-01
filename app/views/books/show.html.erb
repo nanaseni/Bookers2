@@ -1,8 +1,24 @@
+<%= render 'users/info', user: @book.user %>
+<div class="row">
+  <% if @book.user == current_user %>
+    <%= link_to edit_user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
+     <i class="fas fa-user-cog"></i>
+    <% end %>
+  <% else %>
+    <%= link_to user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
+     <i class="fas fa-user-cog"></i>
+    <% end %>
+  <% end %>
+</div>
+
+
+<%= render 'new', book: Book.new %>
+
 <h1>Books</h1>
    <%= link_to @book.title, book_path(@book) %>
    <%= @book.body %>
    <%= image_tag @book.user.get_profile_image(100,100) %>
-   <%= link_to @book.user.name, users_path %>
+   <%= link_to @book.user.name, user_path(@book.user.id) %>
    <% if @book.user == current_user %>
      <%= link_to "Edit", edit_book_path(@book) %>
      <%= link_to "Destroy", book_path(@book), method: :delete,"data-confirm" => "本当に消しますか？" %>

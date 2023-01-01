@@ -1,5 +1,8 @@
 <%= render 'info', user: current_user %>
-<%= link_to "userのedit",edit_user_path(current_user.id) %>
+<%= link_to edit_user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
+ <i class="fas fa-user-cog"></i>
+<% end %>
+
 <%= render 'books/new', book: @book %>
 
 

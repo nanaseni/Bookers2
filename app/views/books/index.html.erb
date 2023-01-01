@@ -1,11 +1,21 @@
-<%= render 'users/info', user: current_user %>
-<%= link_to "userのedit",edit_user_path(current_user.id) %>
+<% if @book.errors.any? %>
+   <h3><%= @book.errors.count %>errors prohibited this obj from being saved:</h3>
+   <ul>
+         <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+         <% end %>
+   </ul>
+<% end %>
 
+<%= render 'users/info', user: current_user %>
+<%= link_to edit_user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
+ <i class="fas fa-user-cog"></i>
+<% end %>
 <%= render 'new', book: @book %>
 
  <h1>Books</h1>
    <% @books.each do |book| %>
       <%= image_tag book.user.get_profile_image(100,100) %>
-      <%= book.title %>
+      <%= link_to book.title, book_path(book.id) %>
       <%= book.body %>
    <% end %>
