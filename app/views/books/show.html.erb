@@ -3,15 +3,7 @@
         <div class= "col-md-3">
             <%= render 'users/info', user: @book.user %>
             <div class="row">
-              <% if @book.user == current_user %>
-                <%= link_to edit_user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
-                 <i class="fas fa-user-cog"></i>
-                <% end %>
-              <% else %>
-                <%= link_to user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
-                 <i class="fas fa-user-cog"></i>
-                <% end %>
-              <% end %>
+             
             </div>
             <%= render 'new', book: Book.new %>
         </div>

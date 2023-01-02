@@ -12,11 +12,7 @@
   <div class="row">
     <div class="col-md-3">
       <%= render 'users/info', user: current_user %>
-      <div class="row">
-          <%= link_to edit_user_path(current_user.id),class: "btn btn-outline-secondary btn-block" do %>
-             <i class="fas fa-user-cog"></i>
-          <% end %>
-      </div>
+     
       <%= render 'new', book: @book %>
     </div>
     <div class="col-md-8 offset-md-1">
@@ -33,7 +29,10 @@
         <% @books.each do |book| %>
         <tbody>
           <tr>
-            <td><%= image_tag book.user.get_profile_image(80,80) %></td>
+            <td><%= link_to user_path(book.user.id) do %>
+                 <%= image_tag book.user.get_profile_image(80,80) %>
+                <% end %>
+            </td>
             <td><%= link_to book.title,book_path(book.id) %></td>
             <td><%= book.body %></td>
           </tr>
