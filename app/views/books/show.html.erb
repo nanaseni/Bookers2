@@ -41,6 +41,7 @@
                           <% end %>
                         </td>
                       <% end %>
+                         <td>コメント数：<%= @book.book_comments.count %></td>
                         <td><%= link_to edit_book_path(@book),class: "btn btn-sm btn-success" do %>
                               Edit
                             <% end %>
@@ -53,7 +54,7 @@
                 </tbody>
             </table>
              <div>
-              <p>コメント数：<%= @book.book_comments.count %></p>
+             
               <% @book.book_comments.each do |book_comment| %>
                 <p><%= image_tag book_comment.user.get_profile_image(80,80) %>
                 <%= book_comment.comment %>
@@ -92,6 +93,7 @@
                         <% end %>
                       </td>
                     <% end %>
+                     <td>コメント数：<%= @book.book_comments.count %></td>
                   </tr>
                 </tbody>
 
