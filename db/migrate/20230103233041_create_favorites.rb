@@ -5,7 +5,7 @@ class CreateFavorites < ActiveRecord::Migration[6.1]
       t.integer :book_id
 
       t.timestamps
-      validates_uniqueness_of :user_id, scope: :user_id
+      
     end
   end
 end
